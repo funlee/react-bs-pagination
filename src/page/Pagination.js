@@ -1,32 +1,23 @@
 import React,{ Component } from 'react';
-import PropTypes from 'prop-types';
-import './bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 class Pagination extends Component {
   constructor(props) {
     super(props)
     this.state = {
       groupCount: 5, //页码分组，显示7个页码，其余用省略号显示
-      startPage: 1  //分组开始页码
+      startPage: 1,  //分组开始页码
+      currentPage: this.props.currentPage || 1
     }
   }
-  static propTypes = {
-    currentPage: PropTypes.number.isRequired,
-    totalPage: PropTypes.number.isRequired
-  }
-  static defaultProps = {
-    currentPage: 1,
-    totalPage: 100
-  }
   getPageList() {
-    const { currentPage, totalPage } = this.props;
-    const { groupCount, startPage } = this.state;
-
+    const { totalPage = 10 } = this.props;
+    const { currentPage, groupCount, startPage } = this.state;
     let pages = []
-    //上一页
+    // 上一页
     pages.push(
       <li
-        className={currentPage === 1 ? "nomore" : null}
+        className={currentPage === 1 ? "disabled" : null}
         onClick={this.prePageHandeler.bind(this)}
         key={0}
       >
@@ -35,75 +26,103 @@ class Pagination extends Component {
         </a>
       </li>
     )
-    if (totalPage <= 10) {
-      /*总页码小于等于10时，全部显示出来*/
+    if (totalPage <= groupCount) {
+      // 总页码小于等于10时，全部显示出来
       for (let i = 1; i <= totalPage; i++) {
         pages.push(
           <li
             key={i}
             onClick={this.pageClick.bind(this, i)}
-            className={currentPage === i ? "activePage" : null}
+            className={currentPage === i ? "active" : null}
           >
             <a href="javascript:;">{i}</a>
-          </li>)
+          </li>
+        )
       }
     } else {
-      /*总页码大于10时，部分显示*/
-      //第一页
+      // 总页码大于10时，部分显示
+      // 第一页
       pages.push(
         <li
-          className={currentPage === 1 ? "activePage" : null}
+          className={currentPage === 1 ? "active" : null}
           key={1}
-        onClick={this.pageClick.bind(this, 1)}
+          onClick={this.pageClick.bind(this, 1)}
         >
-        1
+        <a href="javascript:;">1</a>
         </li>
       )
 
       let pageLength = 0;
       if (groupCount + startPage > totalPage) {
-        pageLength = totalPage
+        pageLength = totalPage;
       } else {
         pageLength = groupCount + startPage;
       }
-      //前面省略号(当当前页码比分组的页码大时显示省略号)
+      // 前面省略号(当当前页码比分组的页码大时显示省略号)
       if (currentPage >= groupCount) {
-        pages.push(<li className="" key={-1}>···</li>)
+        pages.push(
+          <li
+          className="disabled"
+          key={-1}
+          >
+            <a href="javascript:;">···</a>
+          </li>
+        )
       }
-      //非第一页和最后一页显示
+      // 非第一页和最后一页显示
       for (let i = startPage; i < pageLength; i++) {
         if (i <= totalPage - 1 && i > 1) {
-          pages.push(<li className={currentPage === i ? "activePage" : null} key={i}
-            onClick={this.pageClick.bind(this, i)}>{i}</li>)
+          pages.push(
+            <li
+              className={currentPage === i ? "active" : null}
+              key={i}
+              onClick={this.pageClick.bind(this, i)}
+            >
+              <a href="javascript:;">{i}</a>
+            </li>
+          )
         }
       }
-      //后面省略号
+      // 后面省略号
       if (totalPage - startPage >= groupCount + 1) {
-        pages.push(<li className="" key={-2}>···</li>)
+        pages.push(
+          <li
+            className="disabled"
+            key={-2}
+          >
+            <a href="javascript:;">···</a>
+          </li>
+        )
       }
-      //最后一页
-      pages.push(<li className={currentPage === totalPage ? "activePage" : null} key={totalPage}
-        onClick={this.pageClick.bind(this, totalPage)}>{totalPage}</li>)
+      // 最后一页
+      pages.push(
+        <li
+          className={currentPage === totalPage ? "active" : null}
+          key={totalPage}
+          onClick={this.pageClick.bind(this, totalPage)}
+        >
+          <a href="javascript:;">{totalPage}</a>
+        </li>
+      )
     }
-    //下一页
+    // 下一页
     pages.push(
       <li
-        className={currentPage === totalPage ? "nomore" : null}
+        className={currentPage === totalPage ? "disabled" : null}
         onClick={this.nextPageHandeler.bind(this)}
         key={totalPage + 1}
       >
-        <a href="#" aria-label="Next">
+        <a href="javascript:;" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
     )
     return pages;
   }
-  //页码点击
+  // 页码点击
   pageClick(currentPage) {
     const { groupCount } = this.state
-    const getCurrentPage = this.props.pageCallbackFn;
-    //当 当前页码 大于 分组的页码 时，使 当前页 前面 显示 两个页码
+    // 当 当前页码 大于 分组的页码 时，使 当前页 前面 显示 两个页码
     if (currentPage >= groupCount) {
       this.setState({
         startPage: currentPage - 2,
@@ -114,7 +133,7 @@ class Pagination extends Component {
         startPage: 1,
       })
     }
-    //第一页时重新设置分组的起始页
+    // 第一页时重新设置分组的起始页
     if (currentPage === 1) {
       this.setState({
         startPage: 1,
@@ -123,11 +142,13 @@ class Pagination extends Component {
     this.setState({
       currentPage
     })
-    //将当前页码返回父组件
-    getCurrentPage(currentPage)
+    // 将当前页码返回父组件
+    if (this.props.pageCallbackFn && typeof this.props.pageCallbackFn == 'function') {
+      this.props.pageCallbackFn(currentPage)
+    }
   }
 
-  //上一页事件
+  // 上一页事件
   prePageHandeler() {
     let { currentPage } = this.state
     if (--currentPage === 0) {
@@ -136,7 +157,7 @@ class Pagination extends Component {
     this.pageClick(currentPage)
   }
 
-  //下一页事件
+  // 下一页事件
   nextPageHandeler() {
     let { currentPage, totalPage } = this.state
     // const {totalPage} = this.props.pageConfig;
