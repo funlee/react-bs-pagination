@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Pagination from './page/Pagination';
+import Pagination from 'react-bs-pagination';
+import 'react-bs-pagination/lib/index.css';
 
 class App extends Component {
   constructor(props) {

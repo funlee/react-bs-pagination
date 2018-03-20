@@ -1,18 +1,8 @@
 {
-  "name": "react-bs-pagination",
-  "version": "2.0.0",
-  "description": "a bootstrap style pagination component created by react",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js --color --progress --hot"
-  },
-  "keywords": [
-    "react",
-    "webpack",
-    "es6"
-  ],
-  "author": "funlee",
-  "license": "MIT",
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -25,6 +15,7 @@
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^3.0.6",
+    "react-bs-pagination": "^2.0.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
@@ -32,5 +23,10 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
-  }
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.js --color --progress --hot"
+  },
+  "author": "funlee",
+  "license": "ISC"
 }
