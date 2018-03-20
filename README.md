@@ -4,6 +4,7 @@ react-bs-pagination
 
 ![](https://raw.github.com/funlee/react-bs-pagination/master/demo/demo.png "react-bs-pagination")
 
+在线预览：[react-bs-pagination](http://show.funlee.cn/react-bs-pagination/index.html 'react-bs-pagination')
 Getting started
 ---------------
 ```bash

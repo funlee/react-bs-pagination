@@ -1,6 +1,6 @@
 {
   "name": "react-bs-pagination",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "a bootstrap style pagination component created by react",
   "main": "lib/index.js",
   "jsnext:main": "./src/page/Pagination.js",
