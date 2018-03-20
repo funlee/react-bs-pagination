@@ -1,14 +1,3 @@
-react-generator
+react-bs-pagination
 =======================
-----
-```bash
-git clone https://github.com/funlee/react-generator.git
-cd react-generator
-npm install
-npm run start
-```
-stack
-------
-* webpack
-* React
-* sass
+a bootstrap style pagination component created by react
