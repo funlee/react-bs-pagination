@@ -1,12 +1,12 @@
 {
   "name": "react-bs-pagination",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "a bootstrap style pagination component created by react",
   "main": "lib/index.js",
   "jsnext:main": "./src/page/Pagination.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --color --progress --hot",
-    "build":"webpack --config webpack.prod.config.js"
+    "build": "webpack --config webpack.prod.config.js"
   },
   "repository": {
     "type": "git",

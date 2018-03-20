@@ -12,9 +12,6 @@ class App extends Component {
 
   render() {
     return <Pagination
-      group={5} // 页码分组，显示7个页码，其余用省略号显示  - 不开放
-      start={1} // 分组开始页码 - 不开放
-
       current={1} // 当前页码
       total={10} // 总页数
       sizeShow={true}
