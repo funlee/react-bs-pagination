@@ -18,27 +18,16 @@ module.exports = {
         exclude: path.resolve(__dirname, 'node_modules'),
       },
       {
-        // 增加对 sCSS 文件的支持
         test: /\.css$/,
-        // 提取出 Chunk 中的 CSS 代码到单独的文件中
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: ["css-loader"]
         })
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader?limit=50000&name=[path][name].[ext]',
-      },
-      {
-        test: /\.svg/,
-        use: ['file-loader']
       }
     ]
   },
   plugins: [
     new ExtractTextPlugin({
-      // 输出的 CSS 文件名称
       filename: 'index.css',
     }),
     new HtmlWebpackPlugin({
@@ -46,6 +35,5 @@ module.exports = {
       template: path.join(__dirname, 'src/index.html')
     })
   ],
-  // 输出 Source Map
   devtool: 'source-map'
 };

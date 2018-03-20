@@ -1,0 +1,18 @@
+.funlee-pagination {
+  display: flex;
+  align-items: center;
+}
+.funlee-pagination .page-list {
+  display: inline-block;
+  margin-right: 20px;
+}
+.funlee-pagination .btn-group {
+  margin-top: -6px;
+  margin-right: 20px;
+}
+.funlee-pagination .form-control{
+  max-width: 50px;
+  margin-top: -6px;
+}
+
+
